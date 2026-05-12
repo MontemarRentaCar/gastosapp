@@ -7,28 +7,53 @@
 <title>GastosApp</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700;8..144,800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fafaf7;
+    /* Paleta Material You — verde claro + negro */
+    --bg: #f7f9f5;
     --surface: #ffffff;
-    --surface-2: #f4f3ee;
-    --ink: #1a1a1a;
-    --ink-soft: #6b6b6b;
-    --line: #e8e6df;
-    --accent: #d97757;
-    --accent-soft: #f5e6dc;
-    --green: #4a7c59;
-    --green-soft: #e3ede5;
-    --red: #b54848;
-    --red-soft: #f5e0e0;
-    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
-    --shadow-lg: 0 4px 24px rgba(0,0,0,0.08);
+    --surface-2: #eef3eb;
+    --surface-3: #e3ebde;
+    --ink: #1a1c19;
+    --ink-soft: #5a655a;
+    --ink-faint: #8b948a;
+    --line: #dde4d9;
+    --line-soft: #ebefe7;
+
+    /* Verde Google: primario */
+    --primary: #2e7d32;
+    --primary-light: #66bb6a;
+    --primary-container: #d4ecd5;
+    --on-primary: #ffffff;
+    --on-primary-container: #002106;
+
+    /* Verde claro acento */
+    --accent: #7cb342;
+    --accent-soft: #e8f5d8;
+
+    /* Estados */
+    --green: #1b5e20;
+    --green-soft: #d4ecd5;
+    --red: #c62828;
+    --red-soft: #fbe9e7;
+    --amber: #f9a825;
+
+    --shadow-1: 0 1px 2px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-2: 0 1px 3px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.06);
+    --shadow-3: 0 4px 12px rgba(0,0,0,0.1), 0 8px 24px rgba(0,0,0,0.08);
+
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 28px;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body {
     margin: 0; padding: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto', 'Roboto Flex', sans-serif;
     background: var(--bg);
     color: var(--ink);
     min-height: 100vh;
@@ -36,44 +61,54 @@
   }
   body { padding-bottom: 90px; }
 
-  /* Header */
+  /* Header — top app bar Material 3 */
   .app-header {
     position: sticky; top: 0; z-index: 50;
     background: var(--bg);
-    border-bottom: 1px solid var(--line);
-    padding: 20px 20px 16px;
+    padding: 16px 20px 12px;
   }
   .brand {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 26px;
-    letter-spacing: -0.5px;
-    display: flex; align-items: baseline; gap: 8px;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.3px;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--ink);
   }
-  .brand-dot { color: var(--accent); }
+  .brand-logo {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: var(--shadow-1);
+  }
   .brand-sub {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 11px;
     font-weight: 500;
     color: var(--ink-soft);
-    letter-spacing: 1.5px;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
-    margin-left: 4px;
+    margin-left: auto;
   }
   .month-strip {
-    margin-top: 14px;
+    margin-top: 12px;
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px;
   }
   .month-label {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 500;
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
     text-transform: capitalize;
+    color: var(--ink-soft);
   }
   .sync-pill {
     display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 10px;
+    padding: 5px 11px;
     background: var(--surface-2);
     border-radius: 999px;
     font-size: 11px;
@@ -81,63 +116,78 @@
     font-weight: 500;
   }
   .sync-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--ink-soft);
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--ink-faint);
   }
-  .sync-dot.on { background: var(--green); animation: pulse 2s infinite; }
+  .sync-dot.on { background: var(--primary); animation: pulse 2s infinite; box-shadow: 0 0 0 0 rgba(46,125,50,0.5); }
   @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    0% { box-shadow: 0 0 0 0 rgba(46,125,50,0.5); }
+    70% { box-shadow: 0 0 0 6px rgba(46,125,50,0); }
+    100% { box-shadow: 0 0 0 0 rgba(46,125,50,0); }
   }
 
   /* Screens */
-  .screen { display: none; padding: 20px; animation: fadeIn 0.25s ease; }
+  .screen { display: none; padding: 16px 16px 24px; animation: fadeIn 0.25s ease; }
   .screen.active { display: block; }
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(4px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Balance hero card */
+  /* Balance hero card — Material 3 */
   .balance-card {
-    background: var(--ink);
+    background: linear-gradient(135deg, var(--ink) 0%, #2a3028 100%);
     color: #fafaf7;
-    border-radius: 24px;
+    border-radius: var(--radius-xl);
     padding: 28px 24px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-2);
   }
   .balance-card::before {
     content: '';
     position: absolute;
-    top: -50%; right: -20%;
+    top: -40%; right: -25%;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(124,179,66,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .balance-card::after {
+    content: '';
+    position: absolute;
+    bottom: -60%; left: -10%;
     width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(217,119,87,0.25) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(102,187,106,0.18) 0%, transparent 70%);
+    pointer-events: none;
   }
   .balance-label {
     font-size: 11px;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgba(250,250,247,0.6);
-    margin-bottom: 8px;
+    color: rgba(250,250,247,0.65);
+    margin-bottom: 10px;
+    font-weight: 600;
+    position: relative;
   }
   .balance-amount {
-    font-family: 'Fraunces', serif;
-    font-size: 44px;
-    font-weight: 500;
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 46px;
+    font-weight: 700;
     letter-spacing: -1.5px;
     line-height: 1;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    position: relative;
   }
   .balance-desc {
     font-size: 14px;
-    color: rgba(250,250,247,0.75);
+    color: rgba(250,250,247,0.8);
     line-height: 1.4;
+    position: relative;
   }
-  .balance-desc strong { color: var(--accent); font-weight: 600; }
+  .balance-desc strong { color: var(--primary-light); font-weight: 700; }
 
-  /* Personas summary */
+  /* Personas summary cards */
   .persons-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -146,84 +196,98 @@
   }
   .person-card {
     background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 14px;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--line-soft);
   }
+  .person-card.is-A { background: linear-gradient(135deg, var(--surface) 0%, var(--primary-container) 100%); }
+  .person-card.is-B { background: linear-gradient(135deg, var(--surface) 0%, var(--accent-soft) 100%); }
   .person-name {
     font-size: 12px;
     color: var(--ink-soft);
-    font-weight: 500;
-    margin-bottom: 4px;
+    font-weight: 600;
+    margin-bottom: 6px;
     text-transform: capitalize;
+    letter-spacing: 0.3px;
   }
   .person-amount {
-    font-family: 'Fraunces', serif;
+    font-family: 'Roboto Flex', sans-serif;
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.5px;
+    color: var(--ink);
   }
 
   /* Section header */
   .section-head {
     display: flex; align-items: center; justify-content: space-between;
-    margin: 8px 4px 12px;
+    margin: 12px 4px 10px;
   }
   .section-title {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    font-weight: 600;
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.2px;
   }
   .section-action {
     font-size: 13px;
-    color: var(--accent);
+    color: var(--primary);
     font-weight: 600;
     background: none; border: none;
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    transition: background 0.15s;
   }
+  .section-action:active { background: var(--primary-container); }
 
   /* Expense list */
   .expense-list {
-    display: flex; flex-direction: column; gap: 8px;
+    display: flex; flex-direction: column; gap: 6px;
   }
   .expense-item {
     background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 14px;
+    border-radius: var(--radius-md);
     padding: 14px 16px;
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 14px;
     transition: all 0.15s;
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--line-soft);
   }
-  .expense-item:active { transform: scale(0.98); }
+  .expense-item:active { transform: scale(0.98); background: var(--surface-2); }
   .expense-icon {
-    width: 38px; height: 38px;
-    border-radius: 10px;
+    width: 42px; height: 42px;
+    border-radius: 12px;
     background: var(--accent-soft);
+    color: var(--primary);
     display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 700;
     flex-shrink: 0;
   }
-  .expense-icon.fixed { background: var(--green-soft); }
+  .expense-icon.fixed { background: var(--primary-container); color: var(--primary); }
   .expense-body { flex: 1; min-width: 0; }
   .expense-title-row {
     display: flex; align-items: center; gap: 6px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
   .expense-name {
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
   .expense-tag {
     font-size: 9px;
-    background: var(--green-soft);
-    color: var(--green);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 600;
+    background: var(--primary-container);
+    color: var(--primary);
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
   }
@@ -232,85 +296,127 @@
     color: var(--ink-soft);
   }
   .expense-amount {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 700;
     font-size: 16px;
     text-align: right;
+    color: var(--ink);
+    letter-spacing: -0.3px;
   }
   .expense-del {
     background: none; border: none;
-    color: var(--ink-soft);
-    padding: 4px 6px;
+    color: var(--ink-faint);
+    padding: 6px 8px;
     font-size: 14px;
     cursor: pointer;
-    opacity: 0.5;
+    border-radius: 50%;
+    transition: all 0.15s;
   }
-  .expense-del:hover { opacity: 1; color: var(--red); }
+  .expense-del:hover, .expense-del:active {
+    color: var(--red);
+    background: var(--red-soft);
+  }
 
   /* Empty state */
   .empty {
     text-align: center;
     padding: 40px 20px;
     color: var(--ink-soft);
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--line);
   }
   .empty-icon {
-    font-size: 32px;
+    font-size: 36px;
     margin-bottom: 12px;
-    opacity: 0.5;
+    opacity: 0.4;
   }
   .empty-text {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.5;
   }
 
-  /* FAB */
+  /* FAB Material 3 extended */
   .fab {
     position: fixed;
-    bottom: 90px;
+    bottom: 86px;
     right: 20px;
-    width: 58px; height: 58px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: white;
+    height: 56px;
+    min-width: 56px;
+    padding: 0 20px 0 18px;
+    border-radius: 18px;
+    background: var(--primary);
+    color: var(--on-primary);
     border: none;
-    font-size: 28px;
-    font-weight: 300;
-    box-shadow: 0 6px 20px rgba(217,119,87,0.4);
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 16px rgba(46,125,50,0.35), 0 2px 4px rgba(0,0,0,0.1);
     cursor: pointer;
     z-index: 40;
-    transition: transform 0.2s;
+    transition: all 0.2s;
   }
-  .fab:active { transform: scale(0.92); }
+  .fab:active { transform: scale(0.95); box-shadow: 0 3px 8px rgba(46,125,50,0.4); }
+  .fab-plus {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+  }
 
-  /* Bottom nav */
+  /* Bottom nav Material 3 */
   .bottom-nav {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     background: var(--surface);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--line-soft);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
     z-index: 30;
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.04);
   }
   .nav-btn {
     background: none; border: none;
-    padding: 8px 4px;
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 8px 4px 6px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
     color: var(--ink-soft);
     cursor: pointer;
-    font-family: inherit;
-    font-size: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
     font-weight: 500;
     transition: color 0.15s;
+    position: relative;
   }
-  .nav-btn.active { color: var(--accent); }
-  .nav-icon { font-size: 18px; }
+  .nav-icon-pill {
+    padding: 4px 18px;
+    border-radius: 999px;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-btn.active .nav-icon-pill {
+    background: var(--primary-container);
+  }
+  .nav-btn.active {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .nav-icon {
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+  }
+  .nav-btn.active .nav-icon { color: var(--primary); }
 
-  /* Modal */
+  /* Modal Material 3 bottom sheet */
   .modal-backdrop {
     position: fixed; inset: 0;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.45);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     z-index: 100;
@@ -323,28 +429,29 @@
     background: var(--bg);
     width: 100%;
     max-width: 500px;
-    border-radius: 24px 24px 0 0;
-    padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    padding: 16px 20px calc(24px + env(safe-area-inset-bottom));
     max-height: 90vh;
     overflow-y: auto;
-    animation: slideUp 0.25s ease;
+    animation: slideUp 0.28s cubic-bezier(0.32, 0.72, 0, 1);
   }
   @keyframes slideUp {
     from { transform: translateY(100%); }
     to { transform: translateY(0); }
   }
   .modal-handle {
-    width: 40px; height: 4px;
+    width: 36px; height: 4px;
     background: var(--line);
     border-radius: 2px;
-    margin: 0 auto 18px;
+    margin: 0 auto 20px;
   }
   .modal-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'Roboto Flex', sans-serif;
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 4px;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.2px;
+    color: var(--ink);
   }
   .modal-sub {
     font-size: 13px;
@@ -352,121 +459,135 @@
     margin-bottom: 22px;
   }
 
-  /* Form */
-  .field { margin-bottom: 16px; }
+  /* Form Material 3 */
+  .field { margin-bottom: 14px; }
   .field label {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--ink-soft);
     margin-bottom: 6px;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
   }
   .field input, .field select {
     width: 100%;
     padding: 14px 16px;
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     background: var(--surface);
     font-size: 16px;
-    font-family: inherit;
+    font-family: 'Roboto', sans-serif;
     color: var(--ink);
     outline: none;
-    transition: border-color 0.15s;
+    transition: all 0.15s;
   }
   .field input:focus, .field select:focus {
-    border-color: var(--accent);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(46,125,50,0.12);
   }
   .field input[type="number"] {
-    font-family: 'Fraunces', serif;
+    font-family: 'Roboto Flex', sans-serif;
     font-weight: 600;
+    font-size: 18px;
+  }
+  .field input[type="date"] {
+    font-family: 'Roboto', sans-serif;
+    color: var(--ink);
+    -webkit-appearance: none;
+    appearance: none;
   }
 
   .toggle-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 6px;
     background: var(--surface-2);
     padding: 4px;
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
   }
   .toggle-btn {
-    padding: 10px;
+    padding: 11px;
     border: none;
     background: transparent;
-    border-radius: 9px;
-    font-family: inherit;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 600;
     color: var(--ink-soft);
     cursor: pointer;
-    transition: all 0.15s;
+    transition: all 0.18s;
     text-transform: capitalize;
   }
   .toggle-btn.active {
-    background: var(--surface);
-    color: var(--ink);
-    box-shadow: var(--shadow);
+    background: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--shadow-1);
   }
 
   .checkbox-row {
-    display: flex; align-items: center; gap: 10px;
-    padding: 12px 14px;
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
     background: var(--surface-2);
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     margin-bottom: 16px;
     cursor: pointer;
   }
-  .checkbox-row input { width: 18px; height: 18px; accent-color: var(--accent); }
-  .checkbox-row label { font-size: 14px; font-weight: 500; cursor: pointer; }
+  .checkbox-row input { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
+  .checkbox-row label { font-size: 14px; font-weight: 500; cursor: pointer; flex: 1; }
 
-  /* Buttons */
+  /* Buttons Material 3 */
   .btn {
     width: 100%;
-    padding: 16px;
+    padding: 15px;
     border: none;
-    border-radius: 14px;
-    font-family: inherit;
+    border-radius: 999px;
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s;
+    letter-spacing: 0.2px;
   }
   .btn-primary {
-    background: var(--ink);
-    color: white;
+    background: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--shadow-1);
   }
-  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:active { transform: scale(0.97); box-shadow: var(--shadow-2); }
   .btn-secondary {
-    background: var(--surface);
+    background: var(--surface-2);
     color: var(--ink);
-    border: 1px solid var(--line);
   }
+  .btn-secondary:active { background: var(--surface-3); }
   .btn-danger {
     background: var(--red);
     color: white;
   }
-  .btn-group { display: flex; gap: 8px; }
+  .btn-tonal {
+    background: var(--primary-container);
+    color: var(--primary);
+  }
+  .btn-group { display: flex; gap: 10px; }
   .btn-group .btn { flex: 1; }
 
   /* Settle card */
   .settle-card {
-    background: linear-gradient(135deg, var(--green-soft) 0%, #d4e4d8 100%);
-    border-radius: 20px;
-    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-container) 0%, #b8e0ba 100%);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px;
     margin-bottom: 16px;
     text-align: center;
   }
   .settle-card.owes {
-    background: linear-gradient(135deg, var(--accent-soft) 0%, #f0d6c4 100%);
+    background: linear-gradient(135deg, var(--accent-soft) 0%, #cee7a8 100%);
   }
   .settle-text {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
+    font-family: 'Roboto Flex', sans-serif;
+    font-size: 17px;
     font-weight: 500;
-    line-height: 1.3;
-    margin-bottom: 14px;
+    line-height: 1.4;
+    margin-bottom: 4px;
     color: var(--ink);
   }
   .settle-text strong { font-weight: 700; }
@@ -474,29 +595,32 @@
   /* History */
   .history-card {
     background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 10px;
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--line-soft);
   }
   .history-month {
     display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   .history-month-label {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 16px;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
     text-transform: capitalize;
+    color: var(--ink);
+    letter-spacing: -0.2px;
   }
   .history-status {
     font-size: 10px;
-    background: var(--green-soft);
-    color: var(--green);
-    padding: 3px 8px;
-    border-radius: 4px;
+    background: var(--primary-container);
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 999px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
   }
   .history-totals {
@@ -504,9 +628,9 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 8px;
     text-align: center;
-    padding: 10px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
     margin-bottom: 12px;
   }
   .history-tot-label {
@@ -514,19 +638,22 @@
     text-transform: uppercase;
     color: var(--ink-soft);
     letter-spacing: 0.5px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
+    font-weight: 600;
   }
   .history-tot-val {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 700;
     font-size: 14px;
+    color: var(--ink);
   }
   .history-settle {
     font-size: 13px;
     color: var(--ink-soft);
     text-align: center;
+    line-height: 1.5;
   }
-  .history-settle strong { color: var(--ink); }
+  .history-settle strong { color: var(--ink); font-weight: 600; }
   .history-detail {
     margin-top: 12px;
     padding-top: 12px;
@@ -536,64 +663,102 @@
   .history-detail.show { display: block; }
   .history-exp {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 6px 0;
+    padding: 8px 0;
     font-size: 13px;
   }
-  .history-exp-name { color: var(--ink); }
-  .history-exp-meta { color: var(--ink-soft); font-size: 11px; }
+  .history-exp-name { color: var(--ink); font-weight: 500; }
+  .history-exp-meta { color: var(--ink-soft); font-size: 11px; margin-top: 2px; }
   .history-toggle {
     background: none; border: none;
-    color: var(--accent);
+    color: var(--primary);
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 8px;
-    padding: 0;
+    margin-top: 10px;
+    padding: 6px 0;
+  }
+
+  /* Sello "cuentas saldadas" */
+  .settled-stamp {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: var(--primary-container);
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px;
+    color: var(--green);
+    border-left: 3px solid var(--primary);
+  }
+  .settled-stamp strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .stamp-icon {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
   }
 
   /* Settings */
   .settings-group {
     background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 4px;
+    border-radius: var(--radius-lg);
+    padding: 4px 16px;
     margin-bottom: 16px;
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--line-soft);
   }
   .settings-item {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line-soft);
     display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
   }
   .settings-item:last-child { border-bottom: none; }
-  .settings-label { font-size: 14px; font-weight: 500; }
+  .settings-label { font-size: 14px; font-weight: 500; color: var(--ink); }
   .settings-input {
-    width: 140px;
-    padding: 8px 12px;
+    width: 150px;
+    padding: 9px 14px;
     border: 1px solid var(--line);
-    border-radius: 8px;
-    font-family: inherit;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     text-align: right;
     outline: none;
+    color: var(--ink);
+    background: var(--bg);
+    transition: all 0.15s;
   }
-  .settings-input:focus { border-color: var(--accent); }
+  .settings-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(46,125,50,0.12);
+  }
 
-  /* Toast */
+  /* Toast Material 3 */
   .toast {
     position: fixed;
     bottom: 110px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     background: var(--ink);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 999px;
-    font-size: 13px;
+    color: var(--bg);
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 14px;
     font-weight: 500;
     opacity: 0;
     transition: all 0.3s;
     z-index: 200;
     pointer-events: none;
+    box-shadow: var(--shadow-3);
+    max-width: 90%;
   }
   .toast.show {
     opacity: 1;
@@ -605,7 +770,8 @@
 
 <header class="app-header">
   <div class="brand">
-    Gastos<span class="brand-dot">·</span>App
+    <span class="brand-logo">€</span>
+    <span>GastosApp</span>
     <span class="brand-sub">en pareja</span>
   </div>
   <div class="month-strip">
@@ -626,11 +792,11 @@
   </div>
 
   <div class="persons-row">
-    <div class="person-card">
+    <div class="person-card is-A">
       <div class="person-name" id="personALabel">Persona A</div>
       <div class="person-amount" id="personATotal">0,00 €</div>
     </div>
-    <div class="person-card">
+    <div class="person-card is-B">
       <div class="person-name" id="personBLabel">Persona B</div>
       <div class="person-amount" id="personBTotal">0,00 €</div>
     </div>
@@ -643,8 +809,8 @@
   <div class="expense-list" id="recentExpenses"></div>
 
   <div style="margin-top: 24px;">
-    <button class="btn btn-primary" data-action="openSettle" id="settleBtn">
-      💸 Saldar el mes
+    <button class="btn btn-tonal" data-action="openSettle" id="settleBtn">
+      ✓  Saldar el mes
     </button>
   </div>
 </section>
@@ -694,22 +860,29 @@
   </div>
 </section>
 
-<!-- FAB -->
-<button class="fab" id="fab" data-action="openExpense">+</button>
+<!-- FAB extendido -->
+<button class="fab" id="fab" data-action="openExpense">
+  <span class="fab-plus">+</span>
+  <span>Nuevo gasto</span>
+</button>
 
-<!-- Bottom nav -->
+<!-- Bottom nav Material 3 -->
 <nav class="bottom-nav">
   <button class="nav-btn active" data-screen="home" data-action="goto" data-target="home">
-    <span class="nav-icon">⌂</span><span>Inicio</span>
+    <span class="nav-icon-pill"><span class="nav-icon">⌂</span></span>
+    <span>Inicio</span>
   </button>
   <button class="nav-btn" data-screen="expenses" data-action="goto" data-target="expenses">
-    <span class="nav-icon">≡</span><span>Gastos</span>
+    <span class="nav-icon-pill"><span class="nav-icon">≡</span></span>
+    <span>Gastos</span>
   </button>
   <button class="nav-btn" data-screen="history" data-action="goto" data-target="history">
-    <span class="nav-icon">◷</span><span>Historial</span>
+    <span class="nav-icon-pill"><span class="nav-icon">◷</span></span>
+    <span>Historial</span>
   </button>
   <button class="nav-btn" data-screen="settings" data-action="goto" data-target="settings">
-    <span class="nav-icon">⚙</span><span>Ajustes</span>
+    <span class="nav-icon-pill"><span class="nav-icon">⚙</span></span>
+    <span>Ajustes</span>
   </button>
 </nav>
 
@@ -727,6 +900,10 @@
     <div class="field">
       <label>Importe (€)</label>
       <input type="number" id="expAmount" step="0.01" inputmode="decimal" placeholder="0,00">
+    </div>
+    <div class="field">
+      <label>Fecha del gasto</label>
+      <input type="date" id="expDate">
     </div>
     <div class="field">
       <label>¿Quién lo ha pagado?</label>
@@ -853,6 +1030,22 @@
 
   const fmt = (n) => new Intl.NumberFormat('es-ES', {style:'currency', currency:'EUR'}).format(n || 0);
 
+  // Formato corto para gastos: "15 mar"
+  function formatDateShort(dateStr) {
+    if (!dateStr) return '';
+    const [y, m, d] = dateStr.split('-');
+    const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    return `${parseInt(d)} ${months[parseInt(m)-1]}`;
+  }
+
+  // Formato largo para sello de "saldado": "15 de marzo de 2026"
+  function formatDateLong(ts) {
+    if (!ts) return '';
+    const d = new Date(ts);
+    const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    return `${d.getDate()} de ${months[d.getMonth()]} de ${d.getFullYear()}`;
+  }
+
   // === FIREBASE LISTENERS ===
   function setupSync() {
     if (!isFirebaseOk) {
@@ -919,7 +1112,7 @@
       all.push({ id, name: f.name, amount: parseFloat(f.amount), payer: f.payer, isFixed: true });
     });
     Object.entries(state.expenses).forEach(([id, e]) => {
-      all.push({ id, name: e.name, amount: parseFloat(e.amount), payer: e.payer, isFixed: false, ts: e.ts });
+      all.push({ id, name: e.name, amount: parseFloat(e.amount), payer: e.payer, isFixed: false, date: e.date, ts: e.ts });
     });
     return all;
   }
@@ -979,10 +1172,16 @@
       descEl.innerHTML = `<strong>${state.nameA}</strong> debe a <strong>${state.nameB}</strong>`;
     }
 
-    // Recientes (top 5)
+    // Recientes (top 5) — ordenados por fecha del gasto descendente
     const recent = all
       .filter(e => !e.isFixed)
-      .sort((a,b) => (b.ts||0) - (a.ts||0))
+      .sort((a,b) => {
+        // Primero por fecha del gasto, si empata por timestamp
+        const da = a.date || '';
+        const db = b.date || '';
+        if (da !== db) return db.localeCompare(da);
+        return (b.ts||0) - (a.ts||0);
+      })
       .slice(0, 5);
     const fixedShown = all.filter(e => e.isFixed).slice(0, 3);
     const combined = [...recent, ...fixedShown];
@@ -1001,6 +1200,11 @@
     const iconClass = e.isFixed ? 'fixed' : '';
     const tag = e.isFixed ? '<span class="expense-tag">FIJO</span>' : '';
     const delBtn = withDelete ? `<button class="expense-del" data-action="deleteExp" data-id="${e.id}" data-fixed="${e.isFixed ? '1' : '0'}">✕</button>` : '';
+    // Para gastos puntuales con fecha, la mostramos junto al pagador
+    let metaText = `Pagó ${escapeHTML(payerName)}`;
+    if (!e.isFixed && e.date) {
+      metaText += ` · ${formatDateShort(e.date)}`;
+    }
     return `
       <div class="expense-item">
         <div class="expense-icon ${iconClass}">${icon}</div>
@@ -1009,7 +1213,7 @@
             <div class="expense-name">${escapeHTML(e.name)}</div>
             ${tag}
           </div>
-          <div class="expense-meta">Pagó ${escapeHTML(payerName)}</div>
+          <div class="expense-meta">${metaText}</div>
         </div>
         <div class="expense-amount">${fmt(e.amount)}</div>
         ${delBtn}
@@ -1026,8 +1230,13 @@
       id, name: f.name, amount: parseFloat(f.amount), payer: f.payer, isFixed: true
     }));
     const monthlyArr = Object.entries(state.expenses).map(([id, e]) => ({
-      id, name: e.name, amount: parseFloat(e.amount), payer: e.payer, isFixed: false, ts: e.ts
-    })).sort((a,b) => (b.ts||0) - (a.ts||0));
+      id, name: e.name, amount: parseFloat(e.amount), payer: e.payer, isFixed: false, date: e.date, ts: e.ts
+    })).sort((a,b) => {
+      const da = a.date || '';
+      const db = b.date || '';
+      if (da !== db) return db.localeCompare(da);
+      return (b.ts||0) - (a.ts||0);
+    });
 
     const fixedEl = document.getElementById('fixedList');
     const monthlyEl = document.getElementById('monthlyList');
@@ -1063,10 +1272,11 @@
         exps.map(e => {
           const payerName = e.payer === 'A' ? h.nameA : h.nameB;
           const fixed = e.isFixed ? ' · fijo' : '';
+          const dateInfo = (!e.isFixed && e.date) ? ` · ${formatDateShort(e.date)}` : '';
           return `<div class="history-exp">
             <div>
               <div class="history-exp-name">${escapeHTML(e.name)}</div>
-              <div class="history-exp-meta">${escapeHTML(payerName)}${fixed}</div>
+              <div class="history-exp-meta">${escapeHTML(payerName)}${fixed}${dateInfo}</div>
             </div>
             <div class="history-exp-name">${fmt(e.amount)}</div>
           </div>`;
@@ -1095,6 +1305,10 @@
           <div class="history-settle">${settleText}</div>
           <button class="history-toggle" data-action="toggleHistory" data-key="${h.key}">Ver desglose ▾</button>
           <div class="history-detail" id="detail-${h.key}">${detailHTML}</div>
+          <div class="settled-stamp">
+            <span class="stamp-icon">✓</span>
+            <span>Cuentas saldadas el <strong>${formatDateLong(h.closedAt)}</strong></span>
+          </div>
         </div>
       `;
     }).join('');
@@ -1113,6 +1327,10 @@
   window.openExpenseModal = function() {
     document.getElementById('expName').value = '';
     document.getElementById('expAmount').value = '';
+    // Por defecto fecha de hoy en formato YYYY-MM-DD
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    document.getElementById('expDate').value = todayStr;
     state.currentExpPayer = 'A';
     document.getElementById('expPayerA').classList.add('active');
     document.getElementById('expPayerB').classList.remove('active');
@@ -1172,22 +1390,39 @@
   window.saveExpense = async function() {
     const name = document.getElementById('expName').value.trim();
     const amount = parseFloat(document.getElementById('expAmount').value);
+    const dateStr = document.getElementById('expDate').value;
     if (!name || isNaN(amount) || amount <= 0) {
       showToast('Concepto e importe son obligatorios');
       return;
     }
+    if (!dateStr) {
+      showToast('Selecciona una fecha');
+      return;
+    }
+    // Extraer el mes a partir de la fecha (YYYY-MM-DD → YYYY-MM)
+    const expMonth = dateStr.substring(0, 7);
     const id = 'e_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
-    const data = { name, amount, payer: state.currentExpPayer, ts: Date.now() };
+    const data = { name, amount, payer: state.currentExpPayer, date: dateStr, ts: Date.now() };
 
     if (isFirebaseOk) {
-      await db.ref(`gastosapp/months/${monthKey()}/expenses/${id}`).set(data);
+      await db.ref(`gastosapp/months/${expMonth}/expenses/${id}`).set(data);
     } else {
-      state.expenses[id] = data;
+      // En modo local solo se guarda si es el mes actual (limitación menor)
+      if (expMonth === monthKey()) {
+        state.expenses[id] = data;
+      } else {
+        // Otros meses los guardamos aparte en local
+        const raw = JSON.parse(localStorage.getItem('gastosapp') || '{}');
+        raw.months = raw.months || {};
+        raw.months[expMonth] = raw.months[expMonth] || { expenses: {} };
+        raw.months[expMonth].expenses[id] = data;
+        localStorage.setItem('gastosapp', JSON.stringify(raw));
+      }
       saveLocal();
       renderAll();
     }
     closeModal('expenseModal');
-    showToast('Gasto añadido');
+    showToast(expMonth === monthKey() ? 'Gasto añadido' : `Gasto añadido a ${monthLabel(expMonth)}`);
   };
 
   window.saveFixed = async function() {
@@ -1235,7 +1470,8 @@
     const key = monthKey();
 
     const expArr = all.map(e => ({
-      name: e.name, amount: e.amount, payer: e.payer, isFixed: !!e.isFixed
+      name: e.name, amount: e.amount, payer: e.payer, isFixed: !!e.isFixed,
+      date: e.date || null
     }));
 
     const historyEntry = {
